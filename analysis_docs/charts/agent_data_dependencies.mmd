@@ -1,0 +1,32 @@
+graph TD
+    %% 分析师层相互独立
+    MA[Market Analyst] --> |技术分析报告| BR
+    MA --> |技术分析报告| BE
+    NA[News Analyst] --> |新闻分析报告| BR
+    NA --> |新闻分析报告| BE
+    SA[Social Media Analyst] --> |舆情分析报告| BR
+    SA --> |舆情分析报告| BE
+    FA[Fundamentals Analyst] --> |基本面分析报告| BR
+    FA --> |基本面分析报告| BE
+    
+    %% 研究员层相互辩论
+    BR[Bull Researcher] --> |看涨论点| BE
+    BE[Bear Researcher] --> |看跌论点| BR
+    
+    %% 管理层收集信息
+    BR --> |辩论历史| RM[Research Manager]
+    BE --> |辩论历史| RM
+    
+    %% 交易层流程
+    RM --> |投资计划| TR[Trader]
+    TR --> |交易策略| AA[Aggressive Analyst]
+    TR --> |交易策略| CA[Conservative Analyst]
+    TR --> |交易策略| NA[Neutral Analyst]
+    
+    %% 风险管理层汇总
+    AA --> |风险分析| RK[Risk Manager]
+    CA --> |风险分析| RK
+    NA --> |风险分析| RK
+    
+    %% 最终输出
+    RK --> |最终决策| OUTPUT[Final Trade Decision]

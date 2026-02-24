@@ -1,0 +1,30 @@
+graph TB
+    subgraph "条件判断节点"
+        CONDITION[Should Continue?]
+    end
+    
+    subgraph "可能的后续动作"
+        TOOLS[调用工具节点]
+        CLEAR[清除消息节点]
+        NEXT[下一个Agent]
+        DEBATE_NEXT[继续辩论]
+        DEBATE_END[结束辩论]
+    end
+    
+    subgraph "判断依据"
+        ROUND_COUNT[当前轮次计数]
+        TOOL_CALLS[工具调用需求]
+        DEBATE_STATUS[辩论状态]
+        CONFIDENCE[置信度水平]
+    end
+    
+    ROUND_COUNT --> CONDITION
+    TOOL_CALLS --> CONDITION
+    DEBATE_STATUS --> CONDITION
+    CONFIDENCE --> CONDITION
+    
+    CONDITION --> TOOLS
+    CONDITION --> CLEAR
+    CONDITION --> NEXT
+    CONDITION --> DEBATE_NEXT
+    CONDITION --> DEBATE_END

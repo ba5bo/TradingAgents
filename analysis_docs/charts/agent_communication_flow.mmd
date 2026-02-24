@@ -1,0 +1,50 @@
+flowchart TD
+    subgraph "分析师层 (并行执行)"
+        MA[Market Analyst]
+        NA[News Analyst]
+        SA[Social Media Analyst]
+        FA[Fundamentals Analyst]
+    end
+    
+    subgraph "研究员层 (相互辩论)"
+        BR[Bull Researcher]
+        BE[Bear Researcher]
+    end
+    
+    subgraph "管理层"
+        RM[Research Manager]
+        TR[Trader]
+    end
+    
+    subgraph "风险分析层"
+        AA[Aggressive Analyst]
+        CA[Conservative Analyst]
+        NA2[Neutral Analyst]
+        RK[Risk Manager]
+    end
+    
+    MA --> BR
+    NA --> BR
+    SA --> BR
+    FA --> BR
+    MA --> BE
+    NA --> BE
+    SA --> BE
+    FA --> BE
+    
+    BR <--> BE
+    
+    BR --> RM
+    BE --> RM
+    
+    RM --> TR
+    
+    TR --> AA
+    TR --> CA
+    TR --> NA2
+    
+    AA --> RK
+    CA --> RK
+    NA2 --> RK
+    
+    RK --> OUTPUT[Final Decision]

@@ -1,0 +1,69 @@
+graph TB
+    subgraph "用户接口层"
+        A[TradingAgentsGraph] --> B[propagate()]
+    end
+    
+    subgraph "数据接入层"
+        C[Yahoo Finance]
+        D[Alpha Vantage]
+        E[Data Interface Layer]
+        C --> E
+        D --> E
+    end
+    
+    subgraph "工具服务层"
+        E --> F[Stock Data Tools]
+        E --> G[Indicator Tools]
+        E --> H[Fundamental Tools]
+        E --> I[News Tools]
+    end
+    
+    subgraph "分析Agent层"
+        F --> J[Market Analyst<br/>技术分析]
+        G --> J
+        I --> K[News Analyst<br/>宏观新闻]
+        I --> L[Social Media Analyst<br/>舆情分析]
+        H --> M[Fundamentals Analyst<br/>基本面分析]
+    end
+    
+    subgraph "辩论Agent层"
+        J --> N[Bull Researcher<br/>看涨观点]
+        K --> N
+        L --> N
+        M --> N
+        J --> O[Bear Researcher<br/>看跌观点]
+        K --> O
+        L --> O
+        M --> O
+    end
+    
+    subgraph "决策管理层"
+        N --> P[Research Manager<br/>投资判决]
+        O --> P
+        P --> Q[Trader<br/>交易计划]
+        Q --> R[Aggressive Analyst<br/>激进策略]
+        Q --> S[Conservative Analyst<br/>保守策略]
+        Q --> T[Neutral Analyst<br/>平衡策略]
+        R --> U[Risk Manager<br/>最终决策]
+        S --> U
+        T --> U
+    end
+    
+    subgraph "记忆系统"
+        V[Bull Memory]
+        W[Bear Memory]
+        X[Trader Memory]
+        Y[Invest Judge Memory]
+        Z[Risk Manager Memory]
+        V --> N
+        W --> O
+        X --> Q
+        Y --> P
+        Z --> U
+    end
+    
+    B --> J
+    B --> K
+    B --> L
+    B --> M
+    U --> B

@@ -1,0 +1,35 @@
+graph TB
+    subgraph "当前情境"
+        CURR[Current Situation<br/>多报告合并文本]
+    end
+    
+    subgraph "内存查询过程"
+        QUERY[BM25相似度查询]
+        MEMORIES[历史情境库]
+        RESULTS[Top-N匹配结果]
+    end
+    
+    subgraph "内存数据库"
+        DB1[Situation 1<br/>Recommendation 1]
+        DB2[Situation 2<br/>Recommendation 2]
+        DB3[Situation 3<br/>Recommendation 3]
+        DBN[Situation N<br/>Recommendation N]
+    end
+    
+    subgraph "Agent应用"
+        AGENT[Bull/Bear/Trader等Agent]
+        PROMPT[增强提示词]
+        RESPONSE[含历史经验的决策]
+    end
+    
+    CURR --> QUERY
+    QUERY --> MEMORIES
+    MEMORIES --> DB1
+    MEMORIES --> DB2
+    MEMORIES --> DB3
+    MEMORIES --> DBN
+    QUERY --> RESULTS
+    RESULTS --> PROMPT
+    CURR --> PROMPT
+    PROMPT --> AGENT
+    AGENT --> RESPONSE

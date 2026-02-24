@@ -1,0 +1,33 @@
+graph LR
+    subgraph "输入数据"
+        INPUT[Ticker + Date]
+    end
+    
+    subgraph "共享状态 (AgentState)"
+        STATE[company_of_interest<br/>trade_date<br/>messages]
+        REPORTS[market_report<br/>news_report<br/>sentiment_report<br/>fundamentals_report]
+        DEBATE[investment_debate_state<br/>risk_debate_state]
+        PLANS[investment_plan<br/>trader_investment_plan]
+        DECISION[final_trade_decision]
+    end
+    
+    subgraph "数据生产者"
+        ANALYSTS[Analysts<br/>生成各类报告]
+        RESEARCHERS[Researchers<br/>生成辩论历史]
+        MANAGERS[Managers<br/>生成决策和计划]
+    end
+    
+    subgraph "数据消费者"
+        CONSUMERS[下游Agents<br/>消费上游数据]
+    end
+    
+    INPUT --> STATE
+    STATE --> ANALYSTS
+    ANALYSTS --> REPORTS
+    REPORTS --> RESEARCHERS
+    RESEARCHERS --> DEBATE
+    DEBATE --> MANAGERS
+    REPORTS --> MANAGERS
+    MANAGERS --> PLANS
+    PLANS --> CONSUMERS
+    MANAGERS --> DECISION
